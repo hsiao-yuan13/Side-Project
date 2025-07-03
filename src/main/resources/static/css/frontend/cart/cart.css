@@ -1,0 +1,65 @@
+/* 購物車 dropdown 專用 */
+.cart-dropdown-menu {
+  width: 600px;
+  max-height: 500px;
+  overflow-y: auto;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/* 標題區塊 */
+.cart-title {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.cart-count-badge {
+  font-size: 1rem;
+}
+
+/* 購物車表格樣式 */
+.cart-table th,
+.cart-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.cart-pic-col img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.cart-quantity-input {
+  width: 45px;
+  text-align: center;
+}
+
+.cart-update-qty {
+  padding: 2px 6px;
+  margin: 0 2px;
+  border: none;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cart-update-qty:hover {
+  background-color: #ccc;
+}
+
+.cart-remove-product {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart-remove-product:hover {
+  background-color: #bb2d3b;
+}
