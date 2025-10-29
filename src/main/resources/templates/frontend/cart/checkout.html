@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!-- 引用head -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!-- 引用head --><!-- 引用head -->
 <head>
     <title>FanWorld</title>
     <meta charset="utf-8">
@@ -13,6 +13,9 @@
     <meta name="description" content="">
     
     <meta name="memId" th:content="${session.memId}">
+    
+    <meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
     
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/frontend/vendor.css}">

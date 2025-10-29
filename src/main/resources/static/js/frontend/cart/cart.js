@@ -1,15 +1,9 @@
 /**購物車操作
  * 
  */
+
+
 $(document).ready(function() {
-//	console.log(sessionStorage.getItem("memId"));
-	var memId = sessionStorage.getItem("memId"); // 取得 memId
-
-    if (!memId) {
-        console.error("購物車獲取失敗：memId 不存在，請先登入");
-        return;
-    }
-
     getCart();
 });
 
@@ -28,7 +22,6 @@ $(document).on("click",  ".add-to-cart", function(){
 		method: "POST",
 		contentType: "application/json",
 		data: JSON.stringify({ 
-			memId: Number(memId),
 			productId: Number(productId),
 			productName: productName,
 //			productPic: productPic,
@@ -100,9 +93,12 @@ function getCart(){
 	$.ajax({
 		url: "/frontend/cart/showCart",
 		method: "GET",
-		data: {
-			memId: memId
+		xhrFields: {
+			withCredentials: true // **確保帶上 session cookie**
 		},
+//		data: {
+//			memId: memId
+//		},
 		success: function(response){
 //			console.log("伺服器回傳資料:", response);
 			
@@ -152,7 +148,6 @@ $(document).on("click", ".update-qty", function(){
 		method: "POST",
 		contentType: "application/json",
 		data: JSON.stringify({
-			memId: memId,
 			productId: productId,
 			productPrice: productPrice,
 			productQty: newQty
@@ -189,7 +184,6 @@ $(document).on("click", ".remove-product", function(){
 		method: "DELETE",
 		contentType: "application/json",
 		data: JSON.stringify({
-			memId: memId,
 			productId: productId
 		}),
 		success: function(){
@@ -215,6 +209,7 @@ $(document).on("click", ".delete-cart", function(){
 		method: "DELETE",
 		success: function(){
 			alert("購物車已清空");
+			getCart();
 		},
 		error: function(){
 		alert("購物車清空失敗");

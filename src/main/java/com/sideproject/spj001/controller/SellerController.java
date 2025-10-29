@@ -5,6 +5,8 @@ import com.sideproject.spj001.service.SellerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,15 @@ public class SellerController {
     SellerService sellerSvc;
 
 //============================frontend===========================
-//    新增商家
+//    @Bean
+//  public CommandLineRunner encryptPasswords(SellerService sellerService) {
+//      return args -> {
+//          sellerService.encodeAllPlainPasswords();
+//          System.out.println("批次加密完成 ✅");
+//      };
+//  }
+    
+//    商家註冊
     @GetMapping("frontend/seller/sellerRegister")
     public String addSeller(Model model){
         SellerVO sellerVO = new SellerVO();

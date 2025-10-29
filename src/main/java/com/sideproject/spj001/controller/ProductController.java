@@ -42,10 +42,14 @@ public class ProductController {
 //    單一商品資訊介面
     @GetMapping("/shop/singleProduct/{productId}")
     public String SingleProduct(@PathVariable("productId") Integer productId, Model model) throws IOException{
-        System.out.println("Received productId: " + productId); // 日誌輸出
+//        System.out.println("Received productId: " + productId);
 
     	ProductVO productVO = productSvc.getOneProduct(productId);
 
+    	if(productVO == null || productVO.getSeller() == null) {
+    		return "frontend/shop/shop";
+    	}
+    	
         model.addAttribute("productVO", productVO);
         return "frontend/shop/singleProduct";
     }

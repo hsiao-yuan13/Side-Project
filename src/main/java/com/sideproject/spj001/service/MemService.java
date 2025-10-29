@@ -1,16 +1,17 @@
 package com.sideproject.spj001.service;
 
-import com.sideproject.spj001.dao.MemRepository;
-import com.sideproject.spj001.entity.MemVO;
-import com.sideproject.spj001.util.MemCompositeQuery;
-
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.sideproject.spj001.dao.MemRepository;
+import com.sideproject.spj001.entity.MemVO;
+import com.sideproject.spj001.util.MemCompositeQuery;
 
 @Service("memService")
 public class MemService {
@@ -19,10 +20,18 @@ public class MemService {
 
     @Autowired
     private SessionFactory sessionFactory;
-
-    public void addMem(MemVO memVO){
-        repository.save(memVO);
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    public void registerMem(MemVO memVO) {
+    	String rawPassword = memVO.getMemPassword();
+    	String encodedPassword = passwordEncoder.encode(rawPassword);
+    	
+    	memVO.setMemPassword(encodedPassword);
+    	repository.save(memVO);
     }
+
+  
 
     public void updateMem(MemVO memVO){
         repository.save(memVO);
@@ -55,4 +64,20 @@ public class MemService {
         }
         return null; // 登入失敗
     }
+    
+    
+    
+//    public void encodeAllPlainPasswords() {
+//    	List<MemVO> memList = repository.findAll();
+//    	
+//    	for(MemVO memVO : memList) {
+//    		String rawPassword = memVO.getMemPassword();
+//    		
+//    		if(rawPassword != null && !rawPassword.startsWith("$2a$")) {
+//    			String encodedPassword = passwordEncoder.encode(rawPassword);
+//    			memVO.setMemPassword(encodedPassword);
+//    			repository.save(memVO);
+//    		}
+//    	}
+//    }
 }

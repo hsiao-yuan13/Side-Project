@@ -4,44 +4,111 @@ import java.time.LocalDateTime;
 
 public class ChatVO {
 
-	private String sender;
-	private String receiver;
-	private String content;
+	private Integer senderId;
+	private String senderRole;
+	private String senderName;
+	
+	private Integer receiverId;
+	private String receiverRole;
+	private String receiverName;
+	
 	private String roomId;
+	private String content;
 	private LocalDateTime timestamp;
+	private String lastMsg;
 	
-	public String getSender() {
-		return sender;
+	public ChatVO() {
+		this.timestamp = LocalDateTime.now();
+	}
+	
+	public String getRedisKey() {
+		return "chat:" + roomId;
+	}
+
+	public Integer getSenderId() {
+		return senderId;
+	}
+
+	public void setSenderId(Integer senderId) {
+		this.senderId = senderId;
+	}
+
+	public String getSenderRole() {
+		return senderRole;
+	}
+
+	public void setSenderRole(String senderRole) {
+		this.senderRole = senderRole;
+	}
+
+	public String getSenderName() {
+		return senderName;
+	}
+
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
 	}
 	
 	
-	public void setSender(String sender) {
-		this.sender = sender;
+
+	public Integer getReceiverId() {
+		return receiverId;
 	}
-	public String getReceiver() {
-		return receiver;
+
+	public void setReceiverId(Integer receiverId) {
+		this.receiverId = receiverId;
 	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+
+	public String getReceiverRole() {
+		return receiverRole;
 	}
-	public String getContent() {
-		return content;
+
+	public void setReceiverRole(String receiverRole) {
+		this.receiverRole = receiverRole;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public String getReceiverName() {
+		return receiverName;
 	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
 	public String getRoomId() {
 		return roomId;
 	}
+
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
+
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
+
+	public String getLastMsg() {
+		return lastMsg;
+	}
+
+	public void setLastMsg(String lastMsg) {
+		this.lastMsg = lastMsg;
+	}
+
+	
+	
 	
 	
 	

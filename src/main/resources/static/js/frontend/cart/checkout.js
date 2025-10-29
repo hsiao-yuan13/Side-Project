@@ -1,12 +1,6 @@
 $(document).ready(function() {
-	var memId = sessionStorage.getItem("memId"); // 取得 memId
-
-    if (!memId) {
-        console.error("訂單商品清單獲取失敗：memId 不存在，請先登入");
-        return;
-    }
-
-    getCheckoutList(memId);
+	
+    getCheckoutList();
 });
 
 function updateCheckoutUI(checkoutGroupData){
@@ -75,13 +69,10 @@ function updateCheckoutUI(checkoutGroupData){
   }
 }
 
-function getCheckoutList(memId){
+function getCheckoutList(){
 	$.ajax({
 		url: "/frontend/cart/checkoutList",
 		method: "GET",
-		data: {
-			memId: memId
-		},
 		success: function(response){
 			console.log("伺服器回傳資料:", response);
 			updateCheckoutUI(response);

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!-- 引用head -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!-- 引用head -->
 <head>
     <title>FanWorld</title>
     <meta charset="utf-8">
@@ -42,12 +42,10 @@
                 <span class="item">
                   <a th:href="@{/frontend/index}">Home ></a>
                 </span>
-                       <span class="item">
-                       		<a th:href="@{/frontend/mem/memLogin}">Member Login ></a>
-                       </span>
-                
-                       <span class="item">Seller Login</span>
-
+                		<span class="item">
+                       		<a th:href="@{/frontend/mem/memRegister}">Member Register ></a>
+                       	</span>
+                        <span class="item">Seller Register</span>
                         </div>
                 </div>
             </div>
@@ -57,25 +55,33 @@
 
 <!-- ========================以下區域可放置其他內容======================== -->
 
-<div class="login_page">
-    <div id="container1">
-        <div class="login">  
-            <h4>商家登入 Login</h4>
+<div class="signup_page" id="signupPage">
+    <div id="container2">
+        <div class="signup">  
+            <h4>商家註冊 Sign Up</h4>
 
-            <form th:action="@{/frontend/seller/sellerLogin}" method="post">
-                <input type="text" id="username" name="sellerAccount" placeholder="商家帳號" required>
+            <form th:action="@{/register}" method="post">
+                <input type="text" id="fullname" name="sellerName" placeholder="商家名稱" required>
                 <div class="tab"></div>
-                <input type="password" id="password" name="sellerPassword" placeholder="商家密碼" required>
+                <input type="text" id="username2" name="sellerAccount" placeholder="商家帳號" required>
                 <div class="tab"></div>
-                <input type="submit" value="登入" class="submit">
-            </form>
-            
-            
-            <h5><a th:href="@{/frontend/seller/sellerRegister}">註冊商家帳號</a></h5>
+                <input type="password" id="password2" name="sellerPassword" placeholder="商家密碼" required>
+                <div class="tab"></div>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="確認密碼" required>
+                <div class="tab"></div>
+                <input type="text" id="email" name="sellerEmail" placeholder="商家信箱" required>
+                <div class="tab"></div>
+                <input type="text" id="addr" name="sellerAddr" placeholder="商家地址" required>
+                <div class="tab"></div>
+                <input type="text" id="mobile" name="sellerMobile" placeholder="商家手機號碼" required>
+                <div class="tab"></div>            
+                <input type="submit" value="註冊" class="submit">
+            </form>  
+
+            <h5><a th:href="@{/frontend/seller/sellerLogin}">登入商家帳號</a></h5>
         </div>
     </div>
 </div>
-
 
 
 <!-- ========================以上區域可放置其他內容======================== -->

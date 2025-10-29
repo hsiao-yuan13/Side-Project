@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!-- 引用head -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!-- 引用head -->
 <head>
     <title>FanWorld</title>
     <meta charset="utf-8">
@@ -15,14 +15,11 @@
     <meta name="memId" th:content="${session.memId}">
     
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/frontend/vendor.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/frontend/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/frontend/style.css}">
+    <th:block th:replace="~{frontend/fragments/commonCSS :: commonCSS}"></th:block>
+    
     <link rel="stylesheet" type="text/css" th:href="@{/css/frontend/shop/singleProduct.css}">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
 
     <!-- script
     ================================================== -->
@@ -88,22 +85,31 @@
     </div>
 </div>
 
+<div class="seller-info card mt-5 p-4 shadow">
+    <h3 class="mb-3">商家資訊</h3>
+    <p><strong>商家名稱：</strong> <span th:text="${productVO.seller.sellerName}">商家名稱</span></p>
+    <p><strong>聯絡電話：</strong> <span th:text="${productVO.seller.sellerMobile}">電話</span></p>
+    <p><strong>Email：</strong> <span th:text="${productVO.seller.sellerEmail}">email@example.com</span></p>
+<button class="btn btn-primary mt-3" id="chatWithSeller"
+        th:data-seller-id="${productVO.seller.sellerId}"
+        th:data-seller-name="${productVO.seller.sellerName}">
+    私訊商家
+</button>
+</div>
+
 
 
 <!-- ========================以上區域可放置其他內容======================== -->
-
+<!-- 引用chat -->
+<div th:replace="frontend/fragments/chatbox :: chatbox"></div>
 
 
 
 <!-- 引用footer -->
 <div th:replace="frontend/fragments/footer :: footer"></div>
 
-<script th:src="@{/js/frontend/jquery-1.11.0.min.js}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{/js/frontend/bootstrap.bundle.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/frontend/plugins.js}"></script>
-<script type="text/javascript" th:src="@{/js/frontend/script.js}"></script>
-<script type="text/javascript" th:src="@{/js/frontend/cart/cart.js}"></script>
+<!-- 共用JS -->
+<th:block th:replace="frontend/fragments/commonJS :: commonJS"></th:block>
 
 
 </body>

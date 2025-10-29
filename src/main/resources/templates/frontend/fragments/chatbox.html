@@ -1,20 +1,11 @@
 <div th:fragment="chatbox">
-	<div th:if="${session.loginMem != null}" class="chat_button">
+	<div class="chat_button" sec:authorize="isAuthenticated()">
   <img th:src="@{/img/chatIcon.jpg}" alt="Chat Icon" class="chat_icon_img">
 	</div>
+	
 	<div class="chat_container">
 		<div id="myChatList" class="chat_list">
-			<div class="chatListTag" th:each="room : ${chatRooms}"
-				th:data-room-id="${room.id}">
-				<div class="head">
-					<img th:src="@{/img/friends/} + ${room.image}" alt="">
-				</div>
-				<div class="mytext">
-					<div class="name" th:text="${room.name}"></div>
-					<div class="dec" th:text="${room.description}"></div>
-				</div>
-				<div class="msg_num" th:text="${room.unreadCount}"></div>
-			</div>
+		
 		</div>
 		<div class="chat_box">
 			<div id="chatRoom" class="chat_message"></div>

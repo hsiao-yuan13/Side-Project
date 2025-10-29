@@ -1,28 +1,40 @@
 package com.sideproject.spj001.controller;
 
-import com.sideproject.spj001.entity.MemVO;
-import com.sideproject.spj001.service.MemService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import com.sideproject.spj001.entity.MemVO;
+import com.sideproject.spj001.security.MemCustomUserDetails;
+import com.sideproject.spj001.service.MemService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @Controller
 public class MemController {
     @Autowired
     MemService memSvc;
 //============================frontend===========================
-//    會員註冊
+//    @Bean
+//    public CommandLineRunner encryptPasswords(MemService memService) {
+//        return args -> {
+//            memService.encodeAllPlainPasswords();
+//            System.out.println("批次加密完成 ✅");
+//        };
+//    }
+
+//  會員註冊
+  
     @GetMapping("/frontend/mem/memRegister")
     public String addMem(Model model){
         MemVO memVO = new MemVO();
@@ -32,11 +44,20 @@ public class MemController {
 
     @PostMapping("/frontend/mem/insertMem")
     public String insertMem(@Valid MemVO memVO, BindingResult result, Model model){
-        memSvc.addMem(memVO);
+        memSvc.registerMem(memVO);
         List<MemVO> list = memSvc.getAll();
         model.addAttribute("memListData", list);
         model.addAttribute("success", "會員新增成功");
-        return "redirect:/mem/login";
+        return "redirect:/mem/memLogin";
+    }
+    
+    @GetMapping("/frontend/mem/memCenter")
+    public String memCenter(Authentication authentication) {
+    	if(authentication != null && authentication.isAuthenticated()) {
+    		MemCustomUserDetails user = (MemCustomUserDetails) authentication.getPrincipal();
+    		Integer memId = user.getMemId();
+    	}
+    	return "frontend/mem/memCenter";
     }
 
 //    更新會員資料

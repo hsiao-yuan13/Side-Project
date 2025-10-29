@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!-- 引用head -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!-- 引用head -->
 <head>
     <title>FanWorld</title>
     <meta charset="utf-8">
@@ -42,10 +42,11 @@
                 <span class="item">
                   <a th:href="@{/frontend/index}">Home ></a>
                 </span>
-                		<span class="item">
-                       		<a th:href="@{/frontend/mem/memRegister}">Member Register ></a>
-                       	</span>
-                        <span class="item">Seller Register</span>
+                       <span class="item">
+                       		<a th:href="@{/frontend/seller/sellerRegister}">Seller Register ></a>
+                       </span>
+                
+                       <span class="item">Member Register</span>
                         </div>
                 </div>
             </div>
@@ -58,27 +59,29 @@
 <div class="signup_page" id="signupPage">
     <div id="container2">
         <div class="signup">  
-            <h4>商家註冊 Sign Up</h4>
+            <h4>會員註冊 Sign Up</h4>
 
-            <form th:action="@{/register}" method="post">
-                <input type="text" id="fullname" name="sellerName" placeholder="商家名稱" required>
+            <form th:action="@{/frontend/mem/insertMem}" method="post">
+                <input type="text" id="fullname" name="memName" placeholder="會員全名" required>
                 <div class="tab"></div>
-                <input type="text" id="username2" name="sellerAccount" placeholder="商家帳號" required>
+                <input type="text" id="username2" name="memAccount" placeholder="會員帳號" required>
                 <div class="tab"></div>
-                <input type="password" id="password2" name="sellerPassword" placeholder="商家密碼" required>
+                <input type="password" id="password2" name="memPassword" placeholder="會員密碼" required>
                 <div class="tab"></div>
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="確認密碼" required>
                 <div class="tab"></div>
-                <input type="text" id="email" name="sellerEmail" placeholder="商家信箱" required>
+                <input type="text" id="birthday" name="memBirthday" placeholder="會員生日" required>
                 <div class="tab"></div>
-                <input type="text" id="addr" name="sellerAddr" placeholder="商家地址" required>
+                <input type="text" id="email" name="memEmail" placeholder="會員信箱" required>
                 <div class="tab"></div>
-                <input type="text" id="mobile" name="sellerMobile" placeholder="商家手機號碼" required>
+                <input type="text" id="addr" name="memAddr" placeholder="會員地址" required>
+                <div class="tab"></div>
+                <input type="text" id="mobile" name="memMobile" placeholder="會員手機號碼" required>
                 <div class="tab"></div>            
                 <input type="submit" value="註冊" class="submit">
             </form>  
 
-            <h5><a th:href="@{/frontend/seller/sellerLogin}">登入商家帳號</a></h5>
+            <h5><a th:href="@{/frontend/mem/memLogin}">登入會員帳號</a></h5>
         </div>
     </div>
 </div>
